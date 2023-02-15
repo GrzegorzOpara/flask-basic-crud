@@ -18,7 +18,7 @@ def getUidFromToken(token):
     decoded_token = auth.verify_id_token(token)
     return decoded_token['uid']
 
-@app.route('/add', methods=['POST'])
+@app.route('/api/v1/', methods=['POST'])
 def create():
     try:
         document_id = getUidFromToken(request.json['token'])
@@ -27,7 +27,7 @@ def create():
     except Exception as e:
         return f"An Error Occurred: {e}"
 
-@app.route('/get', methods=['GET'])
+@app.route('/api/v1/', methods=['GET'])
 def read():
     try:
         document_id = getUidFromToken(request.json['token'])
