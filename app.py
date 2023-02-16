@@ -4,9 +4,11 @@
 import os
 from flask import Flask, request, jsonify
 from firebase_admin import auth, credentials, firestore, initialize_app
+from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Initialize Firestore DB
 cred = credentials.Certificate('serviceAccountKey.json')
@@ -27,7 +29,7 @@ def create():
     except Exception as e:
         return f"An Error Occurred: {e}"
 
-@app.route('/api/v1/get', methods=['POST'])
+@app.route('/api/v1/profile', methods=['POST'])
 def read():
     try:
         document_id = getUidFromToken(request.json['token'])
