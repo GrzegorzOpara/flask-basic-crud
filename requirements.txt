@@ -1,6 +1,7 @@
 flask
 firebase
 firebase_admin
+google-auth
 python-dotenv
 flask_cors
 gunicorn

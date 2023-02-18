@@ -2,6 +2,8 @@
 FROM python:3.10-slim
 # Allow statements and log messages to immediately appear in the Knative logs
 ENV PYTHONUNBUFFERED True
+ARG CORS_ORIGINS
+ENV CORS_ORIGINS $CORS_ORIGINS
 
 # Copy local code to the container image.
 ENV APP_HOME /app

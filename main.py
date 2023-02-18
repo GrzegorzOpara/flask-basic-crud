@@ -5,12 +5,18 @@ import os
 from flask import Flask, request, jsonify
 from firebase_admin import auth, credentials, firestore, initialize_app
 from flask_cors import CORS, cross_origin
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__)
 
 # CORS
-CORS(app)
+CORS(
+    app, 
+    resources={r"/api/*": {"origins": os.getenv('CORS_ORIGINS')}}
+)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Initialize Firestore DB
@@ -24,7 +30,6 @@ def getUidFromToken(token):
     return decoded_token['uid']
 
 @app.route('/api/v1/add', methods=['POST'])
-@cross_origin()
 def create():
     try:
         document_id = getUidFromToken(request.json['token'])
@@ -34,7 +39,6 @@ def create():
         return f"An Error Occurred: {e}"
 
 @app.route('/api/v1/profile', methods=['POST'])
-@cross_origin()
 def read():
     try:
         document_id = getUidFromToken(request.json['token'])
