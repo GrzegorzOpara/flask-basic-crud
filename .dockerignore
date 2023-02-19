@@ -1,7 +1,19 @@
-# Dockerfile
-README.md
+# Ignore virtual environment.
+venv/
+
+# Ignore Python compiled bytecode.
 *.pyc
-*.pyo
-*.pyd
 __pycache__
+
+# Ignore mypy and pytest related files.
+.mypy_cache
 .pytest_cache
+
+# Ignore custom IDE folders.
+*.sublime-workspace
+*.idea*
+*.vscode
+
+# Environment and secret files.
+.env
+secrets/
