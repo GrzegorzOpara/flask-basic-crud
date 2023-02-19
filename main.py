@@ -2,19 +2,19 @@
 
 # Required imports
 import os
-import logging
 from flask import Flask, request, jsonify
 from firebase_admin import auth, credentials, firestore, initialize_app
 from flask_cors import CORS, cross_origin
 
 # Initialize Flask app
 app = Flask(__name__)
-logging.getLogger('flask_cors').level = logging.DEBUG
+
+# CORS
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Initialize Firestore DB
-cred = credentials.ApplicationDefault #Certificate('serviceAccountKey.json')
+cred = credentials.Certificate('serviceAccountKey.json')
 default_app = initialize_app(cred)
 db = firestore.client()
 collection_ref = db.collection('profiles')
